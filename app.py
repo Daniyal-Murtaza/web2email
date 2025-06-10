@@ -18,7 +18,7 @@ SMTP_USER = "daniyalmurtaza77@gmail.com"
 SMTP_PASSWORD = "vkej tzrb pdfo albd"
 
 def get_basic_template() -> str:
-    """Return a Bootstrap-based HTML template."""
+    """Return a simplified HTML template."""
     return """
     <!DOCTYPE html>
     <html>
@@ -26,25 +26,140 @@ def get_basic_template() -> str:
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Webpage Snapshot</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; }
-            .book-card { margin-bottom: 20px; }
-            .book-image { max-width: 200px; height: auto; }
-            .book-title { font-size: 1.2rem; font-weight: bold; }
-            .book-price { color: #28a745; font-weight: bold; }
-            .book-rating { color: #ffc107; }
-            .category-header { background-color: #f8f9fa; padding: 20px; margin-bottom: 30px; }
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                background-color: #f5f5f5;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .header {
+                text-align: center;
+                padding: 20px 0;
+                background: #fff;
+                margin-bottom: 20px;
+            }
+            .logo {
+                max-width: 200px;
+                height: auto;
+            }
+            .book-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 20px;
+            }
+            .book-card {
+                background: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+                display: flex;
+                flex-direction: column;
+            }
+            .book-card:hover {
+                transform: translateY(-5px);
+            }
+            .book-image-container {
+                width: 100%;
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8f8f8;
+                padding: 20px;
+            }
+            .book-image {
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+            }
+            .book-info {
+                padding: 15px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            .book-title {
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0 0 10px 0;
+                color: #333;
+                line-height: 1.4;
+                min-height: 44px; /* Approximately 2 lines of text */
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .book-price {
+                color: #28a745;
+                font-weight: bold;
+                margin: 5px 0;
+            }
+            .book-rating {
+                color: #ffc107;
+                margin: 5px 0;
+            }
+            .category-title {
+                background: #fff;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                background: #fff;
+                margin-top: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+            .btn:hover {
+                background: #0056b3;
+            }
         </style>
     </head>
     <body>
-        <div class="container py-4">
-            <div class="category-header">
-                <h1 id="title" class="mb-3"></h1>
-                <div id="category-info" class="text-muted"></div>
+        <div class="container">
+            <div class="header">
+                <a href="#" id="site-logo-link">
+                    <img id="site-logo" class="logo" src="" alt="Todos Los Libros">
+                </a>
             </div>
-            <div class="row" id="main-content">
+            
+            <div class="category-title">
+                <h1 id="title"></h1>
+                <div id="category-info"></div>
+            </div>
+            
+            <div class="book-grid" id="main-content">
                 <!-- Book cards will be inserted here -->
+            </div>
+            
+            <div class="footer">
+                <p>Visit our website for more books and information</p>
+                <a href="#" id="footer-link" class="btn">Visit Website</a>
             </div>
         </div>
     </body>
@@ -57,22 +172,57 @@ def extract_content(soup: BeautifulSoup) -> dict:
         "title": "",
         "category_info": "",
         "books": [],
-        "images": []
+        "logo": {"src": "", "link": ""},
+        "site_url": ""
     }
     
     try:
+        # Extract site URL
+        content["site_url"] = soup.find('link', rel='canonical')
+        if content["site_url"]:
+            content["site_url"] = content["site_url"].get('href', '')
+        
+        # Extract logo - try multiple specific selectors
+        logo_selectors = [
+            'div.custom-logo-link img',
+            'div.site-logo img',
+            'header img.logo',
+            'a.custom-logo-link img',
+            'img.custom-logo',
+            'img[src*="logo"]',
+            'img[src*="todosloslibros"]'
+        ]
+        
+        for selector in logo_selectors:
+            logo = soup.select_one(selector)
+            if logo:
+                content["logo"]["src"] = logo.get('src', '')
+                # Try to get the parent link
+                parent_link = logo.find_parent('a')
+                if parent_link:
+                    content["logo"]["link"] = parent_link.get('href', '')
+                break
+        
+        # If still no logo, try to find the site title
+        if not content["logo"]["src"]:
+            site_title = soup.select_one('div.site-title, h1.site-title')
+            if site_title:
+                content["logo"]["text"] = site_title.get_text(strip=True)
+        
         # Extract title
-        if soup.title:
+        title = soup.select_one('h1.page-title, h1.entry-title, h1.product_title')
+        if title:
+            content["title"] = title.get_text(strip=True)
+        elif soup.title:
             content["title"] = soup.title.string
-            logger.info(f"Extracted title: {content['title']}")
         
         # Extract category info
-        category_info = soup.find('div', class_='woocommerce-result-count')
+        category_info = soup.select_one('div.woocommerce-result-count, p.woocommerce-result-count')
         if category_info:
             content["category_info"] = category_info.get_text(strip=True)
         
         # Extract books
-        book_elements = soup.find_all('li', class_='product')
+        book_elements = soup.select('li.product, div.product')
         for book in book_elements:
             book_data = {
                 'title': '',
@@ -82,30 +232,28 @@ def extract_content(soup: BeautifulSoup) -> dict:
                 'link': ''
             }
             
-            # Extract title
-            title_elem = book.find('h2', class_='woocommerce-loop-product__title')
+            # Extract title and link
+            title_elem = book.select_one('h2.woocommerce-loop-product__title, h2.product-title')
             if title_elem:
                 book_data['title'] = title_elem.get_text(strip=True)
+                link_elem = title_elem.find_parent('a')
+                if link_elem:
+                    book_data['link'] = link_elem.get('href', '')
             
             # Extract price
-            price_elem = book.find('span', class_='price')
+            price_elem = book.select_one('span.price, p.price')
             if price_elem:
                 book_data['price'] = price_elem.get_text(strip=True)
             
             # Extract rating
-            rating_elem = book.find('div', class_='star-rating')
+            rating_elem = book.select_one('div.star-rating')
             if rating_elem:
                 book_data['rating'] = rating_elem.get('title', '')
             
             # Extract image
-            img_elem = book.find('img')
+            img_elem = book.select_one('img.attachment-woocommerce_thumbnail, img.wp-post-image')
             if img_elem and img_elem.get('src'):
                 book_data['image'] = img_elem['src']
-            
-            # Extract link
-            link_elem = book.find('a', class_='woocommerce-LoopProduct-link')
-            if link_elem and link_elem.get('href'):
-                book_data['link'] = link_elem['href']
             
             if book_data['title']:  # Only add if we have at least a title
                 content["books"].append(book_data)
@@ -123,6 +271,19 @@ def create_email_html(content: dict) -> str:
         template = get_basic_template()
         soup = BeautifulSoup(template, 'html.parser')
         
+        # Set logo
+        logo_elem = soup.find('img', id='site-logo')
+        if logo_elem:
+            if content["logo"]["src"]:
+                logo_elem['src'] = content["logo"]["src"]
+            elif "text" in content["logo"]:
+                # If no logo image, use text
+                logo_elem.replace_with(BeautifulSoup(f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
+        
+        logo_link = soup.find('a', id='site-logo-link')
+        if logo_link and content["logo"]["link"]:
+            logo_link['href'] = content["logo"]["link"]
+        
         # Set title
         title_elem = soup.find('h1', id='title')
         if title_elem:
@@ -139,22 +300,26 @@ def create_email_html(content: dict) -> str:
             # Add book cards
             for book in content["books"]:
                 # Create book card
-                card = soup.new_tag('div')
-                card['class'] = 'col-md-4 book-card'
-                
-                # Create card content
                 card_html = f"""
-                    <div class="card h-100">
-                        <img src="{book['image']}" class="card-img-top book-image mx-auto mt-3" alt="{book['title']}">
-                        <div class="card-body">
-                            <h5 class="card-title book-title">{book['title']}</h5>
-                            <p class="card-text book-rating">{book['rating']}</p>
-                            <p class="card-text book-price">{book['price']}</p>
-                        </div>
+                    <div class="book-card">
+                        <a href="{book['link']}" style="text-decoration: none; color: inherit;">
+                            <div class="book-image-container">
+                                <img src="{book['image']}" class="book-image" alt="{book['title']}">
+                            </div>
+                            <div class="book-info">
+                                <h3 class="book-title" title="{book['title']}">{book['title']}</h3>
+                                <p class="book-rating">{book['rating']}</p>
+                                <p class="book-price">{book['price']}</p>
+                            </div>
+                        </a>
                     </div>
                 """
-                card.append(BeautifulSoup(card_html, 'html.parser'))
-                main_content_elem.append(card)
+                main_content_elem.append(BeautifulSoup(card_html, 'html.parser'))
+        
+        # Set footer link
+        footer_link = soup.find('a', id='footer-link')
+        if footer_link and content["site_url"]:
+            footer_link['href'] = content["site_url"]
         
         return str(soup)
     except Exception as e:

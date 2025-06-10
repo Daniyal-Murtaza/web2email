@@ -6,296 +6,528 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Webpage Snapshot</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; }
-            .book-card { margin-bottom: 20px; }
-            .book-image { max-width: 200px; height: auto; }
-            .book-title { font-size: 1.2rem; font-weight: bold; }
-            .book-price { color: #28a745; font-weight: bold; }
-            .book-rating { color: #ffc107; }
-            .category-header { background-color: #f8f9fa; padding: 20px; margin-bottom: 30px; }
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                background-color: #f5f5f5;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .header {
+                text-align: center;
+                padding: 20px 0;
+                background: #fff;
+                margin-bottom: 20px;
+            }
+            .logo {
+                max-width: 200px;
+                height: auto;
+            }
+            .book-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 20px;
+            }
+            .book-card {
+                background: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+                display: flex;
+                flex-direction: column;
+            }
+            .book-card:hover {
+                transform: translateY(-5px);
+            }
+            .book-image-container {
+                width: 100%;
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8f8f8;
+                padding: 20px;
+            }
+            .book-image {
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+            }
+            .book-info {
+                padding: 15px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            .book-title {
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0 0 10px 0;
+                color: #333;
+                line-height: 1.4;
+                min-height: 44px; /* Approximately 2 lines of text */
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .book-price {
+                color: #28a745;
+                font-weight: bold;
+                margin: 5px 0;
+            }
+            .book-rating {
+                color: #ffc107;
+                margin: 5px 0;
+            }
+            .category-title {
+                background: #fff;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                background: #fff;
+                margin-top: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+            .btn:hover {
+                background: #0056b3;
+            }
         </style>
 </head>
 <body>
-<div class="container py-4">
-<div class="category-header">
-<h1 class="mb-3" id="title">CHEMISTRY ‣ Todos Los Libros</h1>
-<div class="text-muted" id="category-info"></div>
+<div class="container">
+<div class="header">
+<a href="https://tllibros.com" id="site-logo-link">
+<img alt="Todos Los Libros" class="logo" id="site-logo" src="https://tllibros.com/wp-content/uploads/2021/10/todosloslibros.png"/>
+</a>
 </div>
-<div class="row" id="main-content">
+<div class="category-title">
+<h1 id="title">Todos Los Libros</h1>
+<div id="category-info">Mostrando 1–30 de 34192 resultados</div>
+</div>
+<div class="book-grid" id="main-content">
 <!-- Book cards will be inserted here -->
-<div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Advances in Heterocy..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780120207787-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Advances in Heterocy...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$5,775.00</p>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/medicina-de-urgencias-de-bolsillo/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Medicina de Urgencia..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284129-us-298x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Medicina de Urgencia...">Medicina de Urgencia...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,155.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/pruebas-neurofisiologicas-clinicas-electroencefalografia/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Pruebas neurofisiol�..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417949273-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Pruebas neurofisiol�...">Pruebas neurofisiol�...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,575.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/wyllie-tratamiento-de-epilepsia-principios-y-practica/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Wyllie. Tratamiento ..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257506-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Wyllie. Tratamiento ...">Wyllie. Tratamiento ...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$4,146.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/errores-comunes-en-medicina-de-urgencias-pediatricas/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Errores comunes en m..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257865-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Errores comunes en m...">Errores comunes en m...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,090.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-un-enfoque-practico-y-conciso-terminologia-medica/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417602819-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$769.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-enfermeria-del-paciente-en-estado-critico/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257407-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,090.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/snell-anatomia-clinica/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Snell. Anatomía cl�..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417602277-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Snell. Anatomía cl�...">Snell. Anatomía cl�...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,846.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-un-enfoque-practico-y-conciso-enfermeria-cardiovascular/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417033996-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$682.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-un-enfoque-practico-y-conciso-anatomia-y-fisiologia/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417033477-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$852.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/ejercicio-para-poblaciones-especiales/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Ejercicio para pobla..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417949105-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Ejercicio para pobla...">Ejercicio para pobla...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,642.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/kaplan-sadock-guia-de-estudio-y-autoevaluacion-en-psiquiatria/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Kaplan &amp; Sadock..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419663269-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Kaplan &amp; Sadock...">Kaplan &amp; Sadock...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,500.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/manual-de-nefrologia-e-hipertension/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Manual de Nefrologí..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284884-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Manual de Nefrologí...">Manual de Nefrologí...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,490.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/manual-de-ictus/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Manual de ictus" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892479-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Manual de ictus">Manual de ictus</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,466.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/manual-washington-de-pediatria/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Manual Washington de..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284297-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Manual Washington de...">Manual Washington de...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,490.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/diagnostico-medico-en-pediatria-casos-clinicos/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Diagnóstico médico..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892615-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Diagnóstico médico...">Diagnóstico médico...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,072.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/lir-farmacologia/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="LIR. Farmacología" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284488-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="LIR. Farmacología">LIR. Farmacología</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,470.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/neurologia-de-bolsillo/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Neurología de bolsi..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892189-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Neurología de bolsi...">Neurología de bolsi...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,212.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/west-fisiopatologia-pulmonar-fundamentos/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="West. Fisiopatologí..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418563836-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="West. Fisiopatologí...">West. Fisiopatologí...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$890.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/fisiologia-respiratoria-fundamentos/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Fisiología Respirat..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257803-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Fisiología Respirat...">Fisiología Respirat...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,088.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/rang-fracturas-en-ninos/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Rang. Fracturas en n..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417949129-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Rang. Fracturas en n...">Rang. Fracturas en n...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,840.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/manual-de-valoracion-de-la-salud-en-enfermeria/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Manual de valoració..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417370213-us-300x316.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Manual de valoració...">Manual de valoració...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,255.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/enfermeria-facil-procedimientos-en-enfermeria/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Enfermería fácil. ..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788416353859-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Enfermería fácil. ...">Enfermería fácil. ...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$942.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/medicina-de-las-adicciones-de-bolsillo/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Medicina de las adic..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284150-us-298x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Medicina de las adic...">Medicina de las adic...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,444.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/marriott-electrocardiografia-practica/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Marriott. Electrocar..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788416004201-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Marriott. Electrocar...">Marriott. Electrocar...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,735.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/rohen-atlas-de-anatomia-humana-anatomia/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Rohen. Atlas de anat..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788416353644-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Rohen. Atlas de anat...">Rohen. Atlas de anat...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$945.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/enfermeria-psiquiatrica/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Enfermería psiquiá..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788415419488-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Enfermería psiquiá...">Enfermería psiquiá...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,260.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/manual-del-formato-soap-para-rotaciones/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Manual del formato S..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892608-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Manual del formato S...">Manual del formato S...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$964.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/anestesia-de-bolsillo/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Anestesia de bolsill..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257360-us-286x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Anestesia de bolsill...">Anestesia de bolsill...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,064.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/el-libro-de-neurologia/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="El libro de Neurolog..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284334-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="El libro de Neurolog...">El libro de Neurolog...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,490.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/el-libro-del-ecg/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="El libro del ECG" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284242-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="El libro del ECG">El libro del ECG</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,490.00</p>
+</div>
+</a>
 </div>
 </div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Advances in Heterocy..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780120207824-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Advances in Heterocy...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$5,775.00</p>
+<div class="footer">
+<p>Visit our website for more books and information</p>
+<a class="btn" href="https://tllibros.com/" id="footer-link">Visit Website</a>
 </div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Advances in Heterocy..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780120207794-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Advances in Heterocy...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$5,775.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Advances in Inorgani..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780120236480-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Advances in Inorgani...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$6,090.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Alternative Solvents..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2024/12/9781849735957-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Alternative Solvents...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$4,116.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="An Introduction to M..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780198749691-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">An Introduction to M...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,363.95</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Analytical Profiles ..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780122608285-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Analytical Profiles ...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$5,775.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Annual Reports in Or..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780120408320-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Annual Reports in Or...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$2,583.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="AP Chemistry Flash C..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9781438011745-us-300x440.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">AP Chemistry Flash C...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$461.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="AP Chemistry Premium..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9781506264103-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">AP Chemistry Premium...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$629.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Application of Compu..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9789401792561-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Application of Compu...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$7,349.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Aromatic Fluorinatio..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780849378676-us-297x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Aromatic Fluorinatio...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$2,728.95</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Aspects of Tectonic ..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9783540657088-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Aspects of Tectonic ...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$2,079.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Atlas of Visualizati..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780849326561-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Atlas of Visualizati...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$5,670.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Atmospheric Chemistr..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9781786341761-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Atmospheric Chemistr...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$945.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Automatic Control fo..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780834217812-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Automatic Control fo...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$4,199.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Battery Technology C..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9783030572686-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Battery Technology C...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,259.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Battery Technology C..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9783030572686-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Battery Technology C...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,259.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Bioactive Natural Pr..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9783527337941-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Bioactive Natural Pr...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$4,095.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Bioinorganic Catalys..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780824702410-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Bioinorganic Catalys...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$8,400.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Biological Monitorin..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780470863763-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Biological Monitorin...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$6,510.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Biologics, Biosimila..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9781119564652-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Biologics, Biosimila...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$3,150.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Biomass to Biofuels:..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780470513125-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Biomass to Biofuels:...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$2,094.75</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Bioorganic Chemistry..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9783540669715-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Bioorganic Chemistry...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$2,519.79</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Burnt Human Remains:..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2024/12/9781119682608-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Burnt Human Remains:...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$3,885.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Cambridge Internatio..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9781108863193-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Cambridge Internatio...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,502.76</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Castles, Battles, an..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780226071633-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Castles, Battles, an...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,050.00</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="CHEM (Available Titl..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780538738217-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">CHEM (Available Titl...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,741.95</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Chemical Engineering..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2021/10/9780750656399-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Chemical Engineering...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$1,489.95</p>
-</div>
-</div>
-</div><div class="col-md-4 book-card">
-<div class="card h-100">
-<img alt="Chemical Principles ..." class="card-img-top book-image mx-auto mt-3" src="https://tllibros.com/wp-content/uploads/2024/12/9780357851272-us-300x450.jpg"/>
-<div class="card-body">
-<h5 class="card-title book-title">Chemical Principles ...</h5>
-<p class="card-text book-rating"></p>
-<p class="card-text book-price">$2,623.95</p>
-</div>
-</div>
-</div></div>
 </div>
 </body>
 </html>

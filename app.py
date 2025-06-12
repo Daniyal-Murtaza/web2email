@@ -357,7 +357,7 @@ def index():
     success = ""
 
     if request.method == 'POST':
-        url = request.form.get('url')
+        mode = request.form.get('mode', 'url')
         recipients = request.form.get('recipients', '').strip()
 
         try:
@@ -373,25 +373,65 @@ def index():
                 if '@' not in email or '.' not in email:
                     raise ValueError(f"Invalid email address: {email}")
 
-            logger.info(f"Processing URL: {url}")
-            
-            # Fetch and parse the webpage
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # Remove unwanted elements
-            for tag in soup(['script', 'iframe', 'noscript']):
-                tag.decompose()
-            
-            # Extract content
-            content = extract_content(soup)
-            logger.info("Content extracted successfully")
-            
-            # Create email HTML
-            email_html = create_email_html(content)
-            if not email_html:
-                raise ValueError("Failed to create email HTML")
+            if mode == 'url':
+                url = request.form.get('url')
+                if not url:
+                    raise ValueError("URL is required in URL mode")
+
+                logger.info(f"Processing URL: {url}")
+                
+                # Fetch and parse the webpage
+                response = requests.get(url, timeout=10)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                # Remove unwanted elements
+                for tag in soup(['script', 'iframe', 'noscript']):
+                    tag.decompose()
+                
+                # Extract content
+                content = extract_content(soup)
+                logger.info("Content extracted successfully")
+                
+                # Create email HTML
+                email_html = create_email_html(content)
+                if not email_html:
+                    raise ValueError("Failed to create email HTML")
+                
+                subject = f"Snapshot of {url}"
+            else:  # direct mode
+                subject = request.form.get('subject', '')
+                if not subject:
+                    raise ValueError("Subject is required in direct mode")
+                
+                email_content = request.form.get('email_content', '')
+                if not email_content:
+                    raise ValueError("Email content is required in direct mode")
+                
+                # Create a basic HTML template for direct email
+                email_html = f"""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>{subject}</title>
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                            line-height: 1.6;
+                            color: #333;
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 20px;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    {email_content}
+                </body>
+                </html>
+                """
             
             logger.info("Email HTML created successfully")
             
@@ -401,7 +441,7 @@ def index():
             logger.info("Email template saved to file")
 
             if recipient_list:
-                send_email(email_html, f"Snapshot of {url}", recipient_list)
+                send_email(email_html, subject, recipient_list)
                 success = f"✅ Email sent successfully to {len(recipient_list)} recipients!"
 
         except Exception as e:

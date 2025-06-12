@@ -326,23 +326,26 @@ def create_email_html(content: dict) -> str:
         logger.error(f"Error creating email HTML: {e}")
         return ""
 
-def send_email(html_content: str, subject: str, to_email: str):
-    """Send the email."""
+def send_email(html_content: str, subject: str, to_emails: list):
+    """Send the email to multiple recipients."""
     if not html_content:
         raise ValueError("Empty HTML content")
+    
+    if not to_emails:
+        raise ValueError("No recipients specified")
     
     msg = MIMEText(html_content, "html")
     msg['Subject'] = subject
     msg['From'] = SMTP_USER
-    msg['To'] = to_email
+    msg['To'] = ", ".join(to_emails)  # Join multiple emails with commas
 
     try:
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:
             server.ehlo()
             server.starttls()
             server.login(SMTP_USER, SMTP_PASSWORD)
-            server.sendmail(SMTP_USER, to_email, msg.as_string())
-        logger.info(f"✅ Email sent to {to_email}")
+            server.sendmail(SMTP_USER, to_emails, msg.as_string())
+        logger.info(f"✅ Email sent to {len(to_emails)} recipients")
     except Exception as e:
         logger.error(f"❌ Email sending failed: {e}")
         raise
@@ -355,9 +358,21 @@ def index():
 
     if request.method == 'POST':
         url = request.form.get('url')
-        recipient = request.form.get('recipient')
+        recipients = request.form.get('recipients', '').strip()
 
         try:
+            # Validate and process recipients
+            if not recipients:
+                raise ValueError("No recipients specified")
+            
+            # Split recipients by comma or newline and clean up
+            recipient_list = [email.strip() for email in recipients.replace('\n', ',').split(',') if email.strip()]
+            
+            # Basic email validation
+            for email in recipient_list:
+                if '@' not in email or '.' not in email:
+                    raise ValueError(f"Invalid email address: {email}")
+
             logger.info(f"Processing URL: {url}")
             
             # Fetch and parse the webpage
@@ -385,9 +400,9 @@ def index():
                 f.write(email_html)
             logger.info("Email template saved to file")
 
-            if recipient:
-                send_email(email_html, f"Snapshot of {url}", recipient)
-                success = f"✅ Email sent successfully to {recipient}!"
+            if recipient_list:
+                send_email(email_html, f"Snapshot of {url}", recipient_list)
+                success = f"✅ Email sent successfully to {len(recipient_list)} recipients!"
 
         except Exception as e:
             error = f"❌ Error: {e}"

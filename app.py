@@ -18,210 +18,110 @@ SMTP_USER = "danielzaydee@gmail.com"
 SMTP_PASSWORD = "ahcc crvg xyao lseq"
 
 def get_basic_template() -> str:
-    """Return a simplified HTML template."""
+    """Return a simplified HTML template suitable for a 4-column grid flyer-style book layout."""
     return """
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Webpage Snapshot</title>
+        <title>Book Flyer</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-            
+
             body {
                 font-family: 'Poppins', sans-serif;
-                line-height: 1.6;
-                background-color: #f8f9fa;
+                background-color: #1e1e1e;
                 margin: 0;
                 padding: 0;
-                color: #2d3436;
+                color: #ffffff;
             }
+
             .container {
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 20px;
             }
-            .header {
-                text-align: center;
-                padding: 40px 0;
-                background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
-                margin-bottom: 30px;
-                border-radius: 15px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            }
-            .logo {
-                max-width: 180px;
-                height: auto;
-                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            }
+
             .book-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 25px;
-                padding: 20px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+                padding: 20px 0;
             }
+
             .book-card {
-                background: #ffffff;
-                border-radius: 12px;
-                overflow: hidden;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-                transition: all 0.3s ease;
                 display: flex;
                 flex-direction: column;
-                position: relative;
+                align-items: center;
+                text-align: center;
+                background: transparent;
+                color: #ffffff;
             }
-            .book-card:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            }
+
             .book-image-container {
                 width: 100%;
-                height: 320px;
+                height: 240px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #f8f9fa;
-                padding: 25px;
-                position: relative;
                 overflow: hidden;
+                background-color: #2d2d2d;
+                border-radius: 8px;
             }
+
             .book-image {
-                max-width: 100%;
                 max-height: 100%;
-                width: auto;
-                height: auto;
+                max-width: 100%;
                 object-fit: contain;
-                transition: transform 0.3s ease;
             }
-            .book-card:hover .book-image {
-                transform: scale(1.05);
-            }
+
             .book-info {
-                padding: 20px;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                background: #ffffff;
-            }
-            .book-title {
-                font-size: 18px;
-                font-weight: 600;
-                margin: 0 0 12px 0;
-                color: #2d3436;
-                line-height: 1.4;
-                min-height: 50px;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .book-price {
-                color: #00b894;
-                font-weight: 700;
-                font-size: 20px;
-                margin: 8px 0;
-            }
-            .book-rating {
-                color: #fdcb6e;
-                margin: 8px 0;
-                font-weight: 500;
-            }
-            .category-title {
-                background: #ffffff;
-                padding: 30px;
-                margin-bottom: 30px;
-                border-radius: 12px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-                text-align: center;
-            }
-            .category-title h1 {
-                color: #2d3436;
-                font-size: 32px;
-                margin: 0 0 15px 0;
-                font-weight: 700;
-            }
-            .footer {
-                text-align: center;
-                padding: 40px;
-                background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
-                margin-top: 40px;
-                border-radius: 15px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-                color: #ffffff;
-            }
-            .btn {
-                display: inline-block;
-                padding: 12px 30px;
-                background: #ffffff;
-                color: #6c5ce7;
-                text-decoration: none;
-                border-radius: 25px;
-                margin-top: 15px;
-                font-weight: 600;
-                transition: all 0.3s ease;
-                border: 2px solid transparent;
-            }
-            .btn:hover {
-                background: transparent;
-                color: #ffffff;
-                border-color: #ffffff;
-            }
-            .category-info {
-                color: #636e72;
-                font-size: 16px;
                 margin-top: 10px;
             }
-            .price-tag {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background: #00b894;
-                color: white;
-                padding: 8px 15px;
-                border-radius: 20px;
+
+            .book-title {
+                font-size: 15px;
                 font-weight: 600;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                line-height: 1.3;
+                color: #ffffff;
+                margin: 10px 0 0 0;
+                max-height: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
+
+            /* Optional Responsive Tweak */
+            @media (max-width: 1024px) {
+                .book-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
             @media (max-width: 768px) {
                 .book-grid {
-                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                    grid-template-columns: repeat(2, 1fr);
                 }
-                .header {
-                    padding: 30px 0;
-                }
-                .category-title h1 {
-                    font-size: 24px;
+            }
+
+            @media (max-width: 480px) {
+                .book-grid {
+                    grid-template-columns: 1fr;
                 }
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <div class="header">
-                <a href="#" id="site-logo-link">
-                    <img id="site-logo" class="logo" src="" alt="Todos Los Libros">
-                </a>
-            </div>
-            
-            <div class="category-title">
-                <h1 id="title"></h1>
-                <div id="category-info" class="category-info"></div>
-            </div>
-            
             <div class="book-grid" id="main-content">
-                <!-- Book cards will be inserted here -->
-            </div>
-            
-            <div class="footer">
-                <p>Discover more amazing books on our website</p>
-                <a href="#" id="footer-link" class="btn">Visit Website</a>
+                <!-- Dynamic book cards will be inserted here -->
             </div>
         </div>
     </body>
     </html>
     """
+
 
 def extract_content(soup: BeautifulSoup) -> dict:
     """Extract content from the webpage."""
@@ -334,54 +234,65 @@ def create_email_html(content: dict) -> str:
             if content["logo"]["src"]:
                 logo_elem['src'] = content["logo"]["src"]
             elif "text" in content["logo"]:
-                # If no logo image, use text
                 logo_elem.replace_with(BeautifulSoup(f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
-        
+
         logo_link = soup.find('a', id='site-logo-link')
         if logo_link and content["logo"]["link"]:
             logo_link['href'] = content["logo"]["link"]
-        
+
         # Set title
         title_elem = soup.find('h1', id='title')
         if title_elem:
-            title_elem.string = content["title"] or "Webpage Snapshot"
-        
+            title_elem.string = content.get("title", "Webpage Snapshot")
+
         # Set category info
         category_info_elem = soup.find('div', id='category-info')
-        if category_info_elem and content["category_info"]:
+        if category_info_elem and content.get("category_info"):
             category_info_elem.string = content["category_info"]
-        
+
         # Set main content
         main_content_elem = soup.find('div', id='main-content')
         if main_content_elem:
-            # Add book cards
-            for book in content["books"]:
-                # Create book card
-                card_html = f"""
-                    <div class="book-card">
-                        <a href="{book['link']}" style="text-decoration: none; color: inherit;">
-                            <div class="book-image-container">
-                                <img src="{book['image']}" class="book-image" alt="{book['title']}">
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title" title="{book['title']}">{book['title']}</h3>
-                                <p class="book-rating">{book['rating']}</p>
-                                <p class="book-price">{book['price']}</p>
-                            </div>
-                        </a>
-                    </div>
-                """
-                main_content_elem.append(BeautifulSoup(card_html, 'html.parser'))
-        
+            # Create a table to ensure 4-column layout compatibility in email
+            table_html = '<table width="100%" cellspacing="0" cellpadding="10" style="border-collapse: collapse;"><tbody>'
+            
+            books = content.get("books", [])
+            for i in range(0, len(books), 4):
+                table_html += '<tr>'
+                for j in range(4):
+                    if i + j < len(books):
+                        book = books[i + j]
+                        table_html += f"""
+                            <td align="center" valign="top" width="25%" style="padding: 10px;">
+                                <a href="{book['link']}" style="text-decoration: none; color: inherit;">
+                                    <div class="book-image-container" style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="{book['image']}" class="book-image" alt="{book['title']}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div class="book-info" style="margin-top: 10px; text-align: center;">
+                                        <h3 class="book-title" style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{book['title']}</h3>
+                                    </div>
+                                </a>
+                            </td>
+                        """
+                    else:
+                        table_html += '<td></td>'  # Fill remaining cells if not multiple of 4
+                table_html += '</tr>'
+            table_html += '</tbody></table>'
+
+            # Replace content with the table
+            main_content_elem.clear()
+            main_content_elem.append(BeautifulSoup(table_html, 'html.parser'))
+
         # Set footer link
         footer_link = soup.find('a', id='footer-link')
-        if footer_link and content["site_url"]:
+        if footer_link and content.get("site_url"):
             footer_link['href'] = content["site_url"]
-        
+
         return str(soup)
     except Exception as e:
         logger.error(f"Error creating email HTML: {e}")
         return ""
+
 
 def send_email(html_content: str, subject: str, to_emails: list):
     """Send the email to multiple recipients."""

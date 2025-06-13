@@ -146,7 +146,7 @@ def get_basic_template() -> str:
     <body>
         <div class="container">
             <div class="logo-header">
-                <a href="#" id="site-logo-link">
+                <a href="https://tllibros.com/" id="site-logo-link">
                     <img id="site-logo" class="logo" src="" alt="Site Logo">
                 </a>
             </div>
@@ -156,7 +156,7 @@ def get_basic_template() -> str:
             </div>
 
             <div class="footer-cta">
-                <a href="#" id="footer-link" class="cta-button">Visit Website</a>
+                <a href="https://tllibros.com/" id="footer-link" class="cta-button">Visit Website</a>
             </div>
         </div>
     </body>

@@ -18,7 +18,7 @@ SMTP_USER = "danielzaydee@gmail.com"
 SMTP_PASSWORD = "ahcc crvg xyao lseq"
 
 def get_basic_template() -> str:
-    """Return a simplified HTML template suitable for a 4-column grid flyer-style book layout."""
+    """Return a simplified HTML template suitable for a 4-column grid flyer-style book layout with logo and CTA."""
     return """
     <!DOCTYPE html>
     <html>
@@ -41,6 +41,17 @@ def get_basic_template() -> str:
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 20px;
+            }
+
+            .logo-header {
+                text-align: center;
+                padding: 30px 0 10px 0;
+            }
+
+            .logo {
+                max-width: 180px;
+                height: auto;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
             }
 
             .book-grid {
@@ -92,7 +103,27 @@ def get_basic_template() -> str:
                 white-space: nowrap;
             }
 
-            /* Optional Responsive Tweak */
+            .footer-cta {
+                text-align: center;
+                padding: 40px 0;
+            }
+
+            .cta-button {
+                background-color: #ffffff;
+                color: #1e1e1e;
+                padding: 12px 30px;
+                border-radius: 25px;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                transition: background-color 0.3s ease;
+            }
+
+            .cta-button:hover {
+                background-color: #cccccc;
+            }
+
+            /* Responsive */
             @media (max-width: 1024px) {
                 .book-grid {
                     grid-template-columns: repeat(3, 1fr);
@@ -114,13 +145,25 @@ def get_basic_template() -> str:
     </head>
     <body>
         <div class="container">
+            <div class="logo-header">
+                <a href="#" id="site-logo-link">
+                    <img id="site-logo" class="logo" src="" alt="Site Logo">
+                </a>
+            </div>
+
             <div class="book-grid" id="main-content">
                 <!-- Dynamic book cards will be inserted here -->
+            </div>
+
+            <div class="footer-cta">
+                <a href="#" id="footer-link" class="cta-button">Visit Website</a>
             </div>
         </div>
     </body>
     </html>
     """
+
+
 
 
 def extract_content(soup: BeautifulSoup) -> dict:
@@ -222,6 +265,77 @@ def extract_content(soup: BeautifulSoup) -> dict:
     
     return content
 
+# def create_email_html(content: dict) -> str:
+#     """Create email HTML from content."""
+#     try:
+#         template = get_basic_template()
+#         soup = BeautifulSoup(template, 'html.parser')
+        
+#         # Set logo
+#         logo_elem = soup.find('img', id='site-logo')
+#         if logo_elem:
+#             if content["logo"]["src"]:
+#                 logo_elem['src'] = content["logo"]["src"]
+#             elif "text" in content["logo"]:
+#                 logo_elem.replace_with(BeautifulSoup(f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
+
+#         logo_link = soup.find('a', id='site-logo-link')
+#         if logo_link and content["logo"]["link"]:
+#             logo_link['href'] = content["logo"]["link"]
+
+#         # Set title
+#         title_elem = soup.find('h1', id='title')
+#         if title_elem:
+#             title_elem.string = content.get("title", "Webpage Snapshot")
+
+#         # Set category info
+#         category_info_elem = soup.find('div', id='category-info')
+#         if category_info_elem and content.get("category_info"):
+#             category_info_elem.string = content["category_info"]
+
+#         # Set main content
+#         main_content_elem = soup.find('div', id='main-content')
+#         if main_content_elem:
+#             # Create a table to ensure 4-column layout compatibility in email
+#             table_html = '<table width="100%" cellspacing="0" cellpadding="10" style="border-collapse: collapse;"><tbody>'
+            
+#             books = content.get("books", [])
+#             for i in range(0, len(books), 4):
+#                 table_html += '<tr>'
+#                 for j in range(4):
+#                     if i + j < len(books):
+#                         book = books[i + j]
+#                         table_html += f"""
+#                             <td align="center" valign="top" width="25%" style="padding: 10px;">
+#                                 <a href="{book['link']}" style="text-decoration: none; color: inherit;">
+#                                     <div class="book-image-container" style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+#                                         <img src="{book['image']}" class="book-image" alt="{book['title']}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+#                                     </div>
+#                                     <div class="book-info" style="margin-top: 10px; text-align: center;">
+#                                         <h3 class="book-title" style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{book['title']}</h3>
+#                                     </div>
+#                                 </a>
+#                             </td>
+#                         """
+#                     else:
+#                         table_html += '<td></td>'  # Fill remaining cells if not multiple of 4
+#                 table_html += '</tr>'
+#             table_html += '</tbody></table>'
+
+#             # Replace content with the table
+#             main_content_elem.clear()
+#             main_content_elem.append(BeautifulSoup(table_html, 'html.parser'))
+
+#         # Set footer link
+#         footer_link = soup.find('a', id='footer-link')
+#         if footer_link and content.get("site_url"):
+#             footer_link['href'] = content["site_url"]
+
+#         return str(soup)
+#     except Exception as e:
+#         logger.error(f"Error creating email HTML: {e}")
+#         return ""
+
 def create_email_html(content: dict) -> str:
     """Create email HTML from content."""
     try:
@@ -231,13 +345,14 @@ def create_email_html(content: dict) -> str:
         # Set logo
         logo_elem = soup.find('img', id='site-logo')
         if logo_elem:
-            if content["logo"]["src"]:
+            if content["logo"].get("src"):
                 logo_elem['src'] = content["logo"]["src"]
             elif "text" in content["logo"]:
-                logo_elem.replace_with(BeautifulSoup(f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
+                logo_elem.replace_with(BeautifulSoup(
+                    f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
 
         logo_link = soup.find('a', id='site-logo-link')
-        if logo_link and content["logo"]["link"]:
+        if logo_link and content["logo"].get("link"):
             logo_link['href'] = content["logo"]["link"]
 
         # Set title
@@ -253,10 +368,9 @@ def create_email_html(content: dict) -> str:
         # Set main content
         main_content_elem = soup.find('div', id='main-content')
         if main_content_elem:
-            # Create a table to ensure 4-column layout compatibility in email
+            books = content.get("books", [])
             table_html = '<table width="100%" cellspacing="0" cellpadding="10" style="border-collapse: collapse;"><tbody>'
             
-            books = content.get("books", [])
             for i in range(0, len(books), 4):
                 table_html += '<tr>'
                 for j in range(4):
@@ -265,33 +379,40 @@ def create_email_html(content: dict) -> str:
                         table_html += f"""
                             <td align="center" valign="top" width="25%" style="padding: 10px;">
                                 <a href="{book['link']}" style="text-decoration: none; color: inherit;">
-                                    <div class="book-image-container" style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                        <img src="{book['image']}" class="book-image" alt="{book['title']}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                    <div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="{book['image']}" alt="{book['title']}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                                     </div>
-                                    <div class="book-info" style="margin-top: 10px; text-align: center;">
-                                        <h3 class="book-title" style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{book['title']}</h3>
+                                    <div style="margin-top: 10px; text-align: center;">
+                                        <h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{book['title']}</h3>
                                     </div>
                                 </a>
                             </td>
                         """
                     else:
-                        table_html += '<td></td>'  # Fill remaining cells if not multiple of 4
+                        table_html += '<td></td>'  # fill blank cell if needed
                 table_html += '</tr>'
             table_html += '</tbody></table>'
 
-            # Replace content with the table
             main_content_elem.clear()
             main_content_elem.append(BeautifulSoup(table_html, 'html.parser'))
 
-        # Set footer link
-        footer_link = soup.find('a', id='footer-link')
-        if footer_link and content.get("site_url"):
-            footer_link['href'] = content["site_url"]
+        # Set footer CTA link
+        footer = soup.find('div', class_='footer')
+        if footer and content.get("site_url"):
+            footer_link_html = f"""
+                <p>Discover more amazing books on our website</p>
+                <a href="{content['site_url']}" class="btn" style="display: inline-block; padding: 12px 30px; background: #ffffff; color: #6c5ce7; text-decoration: none; border-radius: 25px; font-weight: 600; border: 2px solid transparent;">
+                    Visit Website
+                </a>
+            """
+            footer.clear()
+            footer.append(BeautifulSoup(footer_link_html, 'html.parser'))
 
         return str(soup)
     except Exception as e:
         logger.error(f"Error creating email HTML: {e}")
         return ""
+
 
 
 def send_email(html_content: str, subject: str, to_emails: list):

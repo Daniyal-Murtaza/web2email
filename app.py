@@ -14,8 +14,8 @@ app = Flask(__name__)
 # Configuration
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SMTP_USER = "daniyalmurtaza77@gmail.com"
-SMTP_PASSWORD = "vkej tzrb pdfo albd"
+SMTP_USER = "danielzaydee@gmail.com"
+SMTP_PASSWORD = "ahcc crvg xyao lseq"
 
 def get_basic_template() -> str:
     """Return a simplified HTML template."""
@@ -27,12 +27,15 @@ def get_basic_template() -> str:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Webpage Snapshot</title>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+            
             body {
-                font-family: Arial, sans-serif;
+                font-family: 'Poppins', sans-serif;
                 line-height: 1.6;
-                background-color: #f5f5f5;
+                background-color: #f8f9fa;
                 margin: 0;
                 padding: 0;
+                color: #2d3436;
             }
             .container {
                 max-width: 1200px;
@@ -41,40 +44,47 @@ def get_basic_template() -> str:
             }
             .header {
                 text-align: center;
-                padding: 20px 0;
-                background: #fff;
-                margin-bottom: 20px;
+                padding: 40px 0;
+                background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
+                margin-bottom: 30px;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             }
             .logo {
-                max-width: 200px;
+                max-width: 180px;
                 height: auto;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
             }
             .book-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
                 padding: 20px;
             }
             .book-card {
-                background: #fff;
-                border-radius: 8px;
+                background: #ffffff;
+                border-radius: 12px;
                 overflow: hidden;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                transition: transform 0.2s;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                transition: all 0.3s ease;
                 display: flex;
                 flex-direction: column;
+                position: relative;
             }
             .book-card:hover {
-                transform: translateY(-5px);
+                transform: translateY(-8px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             }
             .book-image-container {
                 width: 100%;
-                height: 300px;
+                height: 320px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #f8f8f8;
-                padding: 20px;
+                background: #f8f9fa;
+                padding: 25px;
+                position: relative;
+                overflow: hidden;
             }
             .book-image {
                 max-width: 100%;
@@ -82,61 +92,108 @@ def get_basic_template() -> str:
                 width: auto;
                 height: auto;
                 object-fit: contain;
+                transition: transform 0.3s ease;
+            }
+            .book-card:hover .book-image {
+                transform: scale(1.05);
             }
             .book-info {
-                padding: 15px;
+                padding: 20px;
                 flex-grow: 1;
                 display: flex;
                 flex-direction: column;
+                background: #ffffff;
             }
             .book-title {
-                font-size: 16px;
-                font-weight: bold;
-                margin: 0 0 10px 0;
-                color: #333;
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0 0 12px 0;
+                color: #2d3436;
                 line-height: 1.4;
-                min-height: 44px; /* Approximately 2 lines of text */
+                min-height: 50px;
                 display: -webkit-box;
-                -webkit-line-clamp: 3;
+                -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
             .book-price {
-                color: #28a745;
-                font-weight: bold;
-                margin: 5px 0;
+                color: #00b894;
+                font-weight: 700;
+                font-size: 20px;
+                margin: 8px 0;
             }
             .book-rating {
-                color: #ffc107;
-                margin: 5px 0;
+                color: #fdcb6e;
+                margin: 8px 0;
+                font-weight: 500;
             }
             .category-title {
-                background: #fff;
-                padding: 20px;
-                margin-bottom: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                background: #ffffff;
+                padding: 30px;
+                margin-bottom: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                text-align: center;
+            }
+            .category-title h1 {
+                color: #2d3436;
+                font-size: 32px;
+                margin: 0 0 15px 0;
+                font-weight: 700;
             }
             .footer {
                 text-align: center;
-                padding: 20px;
-                background: #fff;
-                margin-top: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                padding: 40px;
+                background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
+                margin-top: 40px;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                color: #ffffff;
             }
             .btn {
                 display: inline-block;
-                padding: 10px 20px;
-                background: #007bff;
-                color: #fff;
+                padding: 12px 30px;
+                background: #ffffff;
+                color: #6c5ce7;
                 text-decoration: none;
-                border-radius: 5px;
-                margin-top: 10px;
+                border-radius: 25px;
+                margin-top: 15px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
             }
             .btn:hover {
-                background: #0056b3;
+                background: transparent;
+                color: #ffffff;
+                border-color: #ffffff;
+            }
+            .category-info {
+                color: #636e72;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+            .price-tag {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: #00b894;
+                color: white;
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            @media (max-width: 768px) {
+                .book-grid {
+                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                }
+                .header {
+                    padding: 30px 0;
+                }
+                .category-title h1 {
+                    font-size: 24px;
+                }
             }
         </style>
     </head>
@@ -150,7 +207,7 @@ def get_basic_template() -> str:
             
             <div class="category-title">
                 <h1 id="title"></h1>
-                <div id="category-info"></div>
+                <div id="category-info" class="category-info"></div>
             </div>
             
             <div class="book-grid" id="main-content">
@@ -158,7 +215,7 @@ def get_basic_template() -> str:
             </div>
             
             <div class="footer">
-                <p>Visit our website for more books and information</p>
+                <p>Discover more amazing books on our website</p>
                 <a href="#" id="footer-link" class="btn">Visit Website</a>
             </div>
         </div>

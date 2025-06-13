@@ -1,23 +1,590 @@
 
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Friendly Reminder: Awaiting Your Feedback</title>
-                    <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            line-height: 1.6;
-                            color: #333;
-                            max-width: 800px;
-                            margin: 0 auto;
-                            padding: 20px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <p>Hi,</p><p><br></p><p>I hope you're doing well. I just wanted to follow up on my previous message regarding [project/topic name]. Please let me know if you had a chance to review it or if there's anything else you need from my side.</p><p>Looking forward to hearing your thoughts.</p><p><br></p><p>Best regards,</p><p>DMZ</p>
-                </body>
-                </html>
-                
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Webpage Snapshot</title>
+<style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+            
+            body {
+                font-family: 'Poppins', sans-serif;
+                line-height: 1.6;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+                color: #2d3436;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .header {
+                text-align: center;
+                padding: 40px 0;
+                background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
+                margin-bottom: 30px;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+            .logo {
+                max-width: 180px;
+                height: auto;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            }
+            .book-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+                padding: 20px;
+            }
+            .book-card {
+                background: #ffffff;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+            }
+            .book-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            }
+            .book-image-container {
+                width: 100%;
+                height: 320px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8f9fa;
+                padding: 25px;
+                position: relative;
+                overflow: hidden;
+            }
+            .book-image {
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                transition: transform 0.3s ease;
+            }
+            .book-card:hover .book-image {
+                transform: scale(1.05);
+            }
+            .book-info {
+                padding: 20px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                background: #ffffff;
+            }
+            .book-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0 0 12px 0;
+                color: #2d3436;
+                line-height: 1.4;
+                min-height: 50px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .book-price {
+                color: #00b894;
+                font-weight: 700;
+                font-size: 20px;
+                margin: 8px 0;
+            }
+            .book-rating {
+                color: #fdcb6e;
+                margin: 8px 0;
+                font-weight: 500;
+            }
+            .category-title {
+                background: #ffffff;
+                padding: 30px;
+                margin-bottom: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                text-align: center;
+            }
+            .category-title h1 {
+                color: #2d3436;
+                font-size: 32px;
+                margin: 0 0 15px 0;
+                font-weight: 700;
+            }
+            .footer {
+                text-align: center;
+                padding: 40px;
+                background: linear-gradient(135deg, #6c5ce7, #a8a4e6);
+                margin-top: 40px;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                color: #ffffff;
+            }
+            .btn {
+                display: inline-block;
+                padding: 12px 30px;
+                background: #ffffff;
+                color: #6c5ce7;
+                text-decoration: none;
+                border-radius: 25px;
+                margin-top: 15px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+            .btn:hover {
+                background: transparent;
+                color: #ffffff;
+                border-color: #ffffff;
+            }
+            .category-info {
+                color: #636e72;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+            .price-tag {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: #00b894;
+                color: white;
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            @media (max-width: 768px) {
+                .book-grid {
+                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                }
+                .header {
+                    padding: 30px 0;
+                }
+                .category-title h1 {
+                    font-size: 24px;
+                }
+            }
+        </style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<a href="https://tllibros.com" id="site-logo-link">
+<img alt="Todos Los Libros" class="logo" id="site-logo" src="https://tllibros.com/wp-content/uploads/2021/10/todosloslibros.png"/>
+</a>
+</div>
+<div class="category-title">
+<h1 id="title">ARCHITECTURE</h1>
+<div class="category-info" id="category-info">Mostrando 1–30 de 699 resultados</div>
+</div>
+<div class="book-grid" id="main-content">
+<!-- Book cards will be inserted here -->
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/150-best-eco-house-ideas/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="150 Best Eco House I..." class="book-image" src="https://tllibros.com/wp-content/uploads/2022/05/9780061968792-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="150 Best Eco House I...">150 Best Eco House I...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$629.79</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/150-best-new-cottage-and-cabin-ideas/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="150 Best New Cottage..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9780062995148-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="150 Best New Cottage...">150 Best New Cottage...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$682.50</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/150-best-new-interior-design-ideas/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="150 Best New Interio..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9780062995162-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="150 Best New Interio...">150 Best New Interio...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$629.79</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/25-concepts-in-modern-architecture-a-guide-for-visual-thinkers/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="25 Concepts in Moder..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9781350055605-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="25 Concepts in Moder...">25 Concepts in Moder...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$838.95</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-blueprint-for-coastal-adaptation-uniting-design-economics-and-policy/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Blueprint for Coas..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9781642831399-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Blueprint for Coas...">A Blueprint for Coas...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$840.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-city-is-not-a-computer-other-urban-intelligences-places-books-2/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A City Is Not a Comp..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780691208053-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A City Is Not a Comp...">A City Is Not a Comp...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$418.95</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-discipline-of-multiprogramming-programming-theory-for-distributed-applications-monographs-in-computer-science/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Discipline of Mult..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780387952062-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Discipline of Mult...">A Discipline of Mult...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,309.79</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-field-guide-to-american-houses-revised-the-definitive-guide-to-identifying-and-understanding-americas-domestic-architecture/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Field Guide to Ame..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780375710827-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Field Guide to Ame...">A Field Guide to Ame...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$735.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-house-by-the-sea/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A House by the Sea" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9781419720819-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A House by the Sea">A House by the Sea</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,260.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-house-in-maine/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A House in Maine" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9780847899098-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A House in Maine">A House in Maine</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,260.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-life-of-picasso-iv-the-minotaur-years-1933-1943/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Life of Picasso IV..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9780307266668-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Life of Picasso IV...">A Life of Picasso IV...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$840.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-place-to-call-home-tradition-style-and-memory-in-the-new-american-house/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Place to Call Home..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780847860210-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Place to Call Home...">A Place to Call Home...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,207.50</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-summer-place-living-by-the-sea/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Summer Place: Livi..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780847870004-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Summer Place: Livi...">A Summer Place: Livi...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,050.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-tight-practical-integration-of-relations-and-functions-lecture-notes-in-computer-science-1712/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Tight, Practical I..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540666448-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Tight, Practical I...">A Tight, Practical I...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,079.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-tower-in-tuscany-or-a-home-for-my-writers-and-other-animals/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Tower in Tuscany: ..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780847870103-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Tower in Tuscany: ...">A Tower in Tuscany: ...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,155.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/a-year-at-clove-brook-farm-gardening-tending-flocks-keeping-bees-collecting-antiques-and-entertaining-friends/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="A Year at Clove Broo..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9780847869749-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="A Year at Clove Broo...">A Year at Clove Broo...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$945.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/abstract-compositional-analysis-of-iterated-relations-a-structural-approach-to-complex-state-transition-systems-lecture-notes-in-computer-science-1426/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Abstract Composition..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540655060-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Abstract Composition...">Abstract Composition...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,079.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/abstraction-reformulation-and-approximation-4th-international-symposium-sara-2000-horseshoe-bay-usa-july-26-29-2000-proceedings-lecture-notes-in-computer-science-1864/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Abstraction, Reformu..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540678397-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Abstraction, Reformu...">Abstraction, Reformu...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,079.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/active-technologies-for-network-and-service-management-10th-ifip-ieee-international-workshop-on-distributed-systems-operations-and-management-lecture-notes-in-computer-science-1700/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Active Technologies ..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540665984-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Active Technologies ...">Active Technologies ...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,289.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/ada-in-details-interpreting-the-2010-americans-with-disabilities-act-standards-for-accessible-design-international-code-council/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="ADA in Details: Inte..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9781119900245-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="ADA in Details: Inte...">ADA in Details: Inte...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,888.95</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/advances-in-computing-science-asian-2000-6th-asian-computing-science-conference-penang-malaysia-november-25-27-2000-proceedings-lecture-notes-in-computer-science-1961/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Advances in Computin..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540414285-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Advances in Computin...">Advances in Computin...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,079.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/advances-in-computing-science-asian97-third-asian-computing-science-conference-kathmandu-nepal-december-9-11-1997-proceedings-lecture-notes-in-computer-science-1345/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Advances in Computin..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540638759-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Advances in Computin...">Advances in Computin...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,079.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/advances-in-computing-science-asian99/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Advances in Computin..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540668565-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Advances in Computin...">Advances in Computin...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,499.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/aesthetics-equals-politics-new-discourses-across-art-architecture-and-philosophy-the-mit-press/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Aesthetics Equals Po..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9780262039437-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Aesthetics Equals Po...">Aesthetics Equals Po...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$733.95</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/alexa-hampton-design-style-and-influence/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Alexa Hampton: Desig..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9780593578643-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Alexa Hampton: Desig...">Alexa Hampton: Desig...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$1,260.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/algebraic-foundations-of-systems-specification-ifip-state-of-the-art-reports/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Algebraic Foundation..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540637721-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Algebraic Foundation...">Algebraic Foundation...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,079.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/algebraic-methodology-and-software-technology-8th-international-conference-amast-2000-iowa-city-iowa-usa-may-20-27-2000-proceedings-lecture-notes-in-computer-science-1816/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Algebraic Methodolog..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540675303-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Algebraic Methodolog...">Algebraic Methodolog...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$3,129.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/algorithms-esa-98-6th-annual-european-symposium-venice-italy-august-24-26-1998-proceedings-lecture-notes-in-computer-science-1461/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Algorithms – E..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540648482-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Algorithms – E...">Algorithms – E...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,709.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/algorithms-esa99-7th-annual-european-symposium-prague-czech-republic-july-16-18-1999-proceedings-lecture-notes-in-computer-science-1643/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Algorithms – E..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540662518-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Algorithms – E...">Algorithms – E...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$3,129.00</p>
+</div>
+</a>
+</div>
+
+<div class="book-card">
+<a href="https://tllibros.com/producto/algorithms-and-computation-8th-international-symposium-isaac97-singapore-december-17-19-1997-proceedings-lecture-notes-in-computer-science-1350/" style="text-decoration: none; color: inherit;">
+<div class="book-image-container">
+<img alt="Algorithms and Compu..." class="book-image" src="https://tllibros.com/wp-content/uploads/2021/10/9783540638902-us-300x450.jpg"/>
+</div>
+<div class="book-info">
+<h3 class="book-title" title="Algorithms and Compu...">Algorithms and Compu...</h3>
+<p class="book-rating"></p>
+<p class="book-price">$2,289.00</p>
+</div>
+</a>
+</div>
+</div>
+<div class="footer">
+<p>Discover more amazing books on our website</p>
+<a class="btn" href="https://tllibros.com/categoria-producto/architecture/" id="footer-link">Visit Website</a>
+</div>
+</div>
+</body>
+</html>

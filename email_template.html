@@ -5,528 +5,442 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Webpage Snapshot</title>
+<title>Book Flyer</title>
 <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
             body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                background-color: #f5f5f5;
+                font-family: 'Poppins', sans-serif;
+                background-color: #1e1e1e;
                 margin: 0;
                 padding: 0;
+                color: #ffffff;
             }
+
             .container {
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 20px;
             }
-            .header {
+
+            .logo-header {
                 text-align: center;
-                padding: 20px 0;
-                background: #fff;
-                margin-bottom: 20px;
+                padding: 30px 0 10px 0;
             }
+
             .logo {
-                max-width: 200px;
+                max-width: 180px;
                 height: auto;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
             }
+
             .book-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
-                padding: 20px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+                padding: 20px 0;
             }
+
             .book-card {
-                background: #fff;
-                border-radius: 8px;
-                overflow: hidden;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                transition: transform 0.2s;
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+                text-align: center;
+                background: transparent;
+                color: #ffffff;
             }
-            .book-card:hover {
-                transform: translateY(-5px);
-            }
+
             .book-image-container {
                 width: 100%;
-                height: 300px;
+                height: 240px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #f8f8f8;
-                padding: 20px;
+                overflow: hidden;
+                background-color: #2d2d2d;
+                border-radius: 8px;
             }
+
             .book-image {
-                max-width: 100%;
                 max-height: 100%;
-                width: auto;
-                height: auto;
+                max-width: 100%;
                 object-fit: contain;
             }
+
             .book-info {
-                padding: 15px;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-            }
-            .book-title {
-                font-size: 16px;
-                font-weight: bold;
-                margin: 0 0 10px 0;
-                color: #333;
-                line-height: 1.4;
-                min-height: 44px; /* Approximately 2 lines of text */
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .book-price {
-                color: #28a745;
-                font-weight: bold;
-                margin: 5px 0;
-            }
-            .book-rating {
-                color: #ffc107;
-                margin: 5px 0;
-            }
-            .category-title {
-                background: #fff;
-                padding: 20px;
-                margin-bottom: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .footer {
-                text-align: center;
-                padding: 20px;
-                background: #fff;
-                margin-top: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .btn {
-                display: inline-block;
-                padding: 10px 20px;
-                background: #007bff;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
                 margin-top: 10px;
             }
-            .btn:hover {
-                background: #0056b3;
+
+            .book-title {
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 1.3;
+                color: #ffffff;
+                margin: 10px 0 0 0;
+                max-height: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .footer-cta {
+                text-align: center;
+                padding: 40px 0;
+            }
+
+            .cta-button {
+                background-color: #ffffff;
+                color: #1e1e1e;
+                padding: 12px 30px;
+                border-radius: 25px;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                transition: background-color 0.3s ease;
+            }
+
+            .cta-button:hover {
+                background-color: #cccccc;
+            }
+
+            /* Responsive */
+            @media (max-width: 1024px) {
+                .book-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .book-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 480px) {
+                .book-grid {
+                    grid-template-columns: 1fr;
+                }
             }
         </style>
 </head>
 <body>
 <div class="container">
-<div class="header">
+<div class="logo-header">
 <a href="https://tllibros.com" id="site-logo-link">
-<img alt="Todos Los Libros" class="logo" id="site-logo" src="https://tllibros.com/wp-content/uploads/2021/10/todosloslibros.png"/>
+<img alt="Site Logo" class="logo" id="site-logo" src="https://tllibros.com/wp-content/uploads/2021/10/todosloslibros.png"/>
 </a>
 </div>
-<div class="category-title">
-<h1 id="title">Todos Los Libros</h1>
-<div id="category-info">Mostrando 1–30 de 34192 resultados</div>
+<div class="book-grid" id="main-content"><table cellpadding="10" cellspacing="0" style="border-collapse: collapse;" width="100%"><tbody><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/150-best-eco-house-ideas/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="150 Best Eco House I..." src="https://tllibros.com/wp-content/uploads/2022/05/9780061968792-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-<div class="book-grid" id="main-content">
-<!-- Book cards will be inserted here -->
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/medicina-de-urgencias-de-bolsillo/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Medicina de Urgencia..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284129-us-298x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Medicina de Urgencia...">Medicina de Urgencia...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,155.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">150 Best Eco House I...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/150-best-new-cottage-and-cabin-ideas/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="150 Best New Cottage..." src="https://tllibros.com/wp-content/uploads/2024/12/9780062995148-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/pruebas-neurofisiologicas-clinicas-electroencefalografia/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Pruebas neurofisiol�..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417949273-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Pruebas neurofisiol�...">Pruebas neurofisiol�...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,575.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">150 Best New Cottage...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/150-best-new-interior-design-ideas/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="150 Best New Interio..." src="https://tllibros.com/wp-content/uploads/2024/12/9780062995162-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/wyllie-tratamiento-de-epilepsia-principios-y-practica/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Wyllie. Tratamiento ..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257506-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Wyllie. Tratamiento ...">Wyllie. Tratamiento ...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$4,146.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">150 Best New Interio...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/25-concepts-in-modern-architecture-a-guide-for-visual-thinkers/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="25 Concepts in Moder..." src="https://tllibros.com/wp-content/uploads/2024/12/9781350055605-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/errores-comunes-en-medicina-de-urgencias-pediatricas/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Errores comunes en m..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257865-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Errores comunes en m...">Errores comunes en m...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,090.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">25 Concepts in Moder...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-blueprint-for-coastal-adaptation-uniting-design-economics-and-policy/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Blueprint for Coas..." src="https://tllibros.com/wp-content/uploads/2024/12/9781642831399-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-un-enfoque-practico-y-conciso-terminologia-medica/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417602819-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$769.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Blueprint for Coas...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-city-is-not-a-computer-other-urban-intelligences-places-books-2/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A City Is Not a Comp..." src="https://tllibros.com/wp-content/uploads/2021/10/9780691208053-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-enfermeria-del-paciente-en-estado-critico/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257407-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,090.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A City Is Not a Comp...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-discipline-of-multiprogramming-programming-theory-for-distributed-applications-monographs-in-computer-science/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Discipline of Mult..." src="https://tllibros.com/wp-content/uploads/2021/10/9780387952062-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/snell-anatomia-clinica/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Snell. Anatomía cl�..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417602277-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Snell. Anatomía cl�...">Snell. Anatomía cl�...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,846.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Discipline of Mult...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-field-guide-to-american-houses-revised-the-definitive-guide-to-identifying-and-understanding-americas-domestic-architecture/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Field Guide to Ame..." src="https://tllibros.com/wp-content/uploads/2021/10/9780375710827-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-un-enfoque-practico-y-conciso-enfermeria-cardiovascular/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417033996-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$682.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Field Guide to Ame...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-house-by-the-sea/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A House by the Sea" src="https://tllibros.com/wp-content/uploads/2024/12/9781419720819-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/coleccion-lippincott-enfermeria-un-enfoque-practico-y-conciso-anatomia-y-fisiologia/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Colección Lippincot..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417033477-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Colección Lippincot...">Colección Lippincot...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$852.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A House by the Sea</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-house-in-maine/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A House in Maine" src="https://tllibros.com/wp-content/uploads/2024/12/9780847899098-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/ejercicio-para-poblaciones-especiales/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Ejercicio para pobla..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417949105-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Ejercicio para pobla...">Ejercicio para pobla...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,642.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A House in Maine</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-life-of-picasso-iv-the-minotaur-years-1933-1943/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Life of Picasso IV..." src="https://tllibros.com/wp-content/uploads/2024/12/9780307266668-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/kaplan-sadock-guia-de-estudio-y-autoevaluacion-en-psiquiatria/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Kaplan &amp; Sadock..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419663269-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Kaplan &amp; Sadock...">Kaplan &amp; Sadock...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,500.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Life of Picasso IV...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-place-to-call-home-tradition-style-and-memory-in-the-new-american-house/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Place to Call Home..." src="https://tllibros.com/wp-content/uploads/2021/10/9780847860210-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/manual-de-nefrologia-e-hipertension/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Manual de Nefrologí..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284884-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Manual de Nefrologí...">Manual de Nefrologí...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,490.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Place to Call Home...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-summer-place-living-by-the-sea/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Summer Place: Livi..." src="https://tllibros.com/wp-content/uploads/2021/10/9780847870004-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/manual-de-ictus/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Manual de ictus" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892479-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Manual de ictus">Manual de ictus</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,466.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Summer Place: Livi...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-tight-practical-integration-of-relations-and-functions-lecture-notes-in-computer-science-1712/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Tight, Practical I..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540666448-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/manual-washington-de-pediatria/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Manual Washington de..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284297-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Manual Washington de...">Manual Washington de...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,490.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Tight, Practical I...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-tower-in-tuscany-or-a-home-for-my-writers-and-other-animals/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Tower in Tuscany: ..." src="https://tllibros.com/wp-content/uploads/2021/10/9780847870103-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/diagnostico-medico-en-pediatria-casos-clinicos/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Diagnóstico médico..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892615-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Diagnóstico médico...">Diagnóstico médico...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,072.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Tower in Tuscany: ...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/a-year-at-clove-brook-farm-gardening-tending-flocks-keeping-bees-collecting-antiques-and-entertaining-friends/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="A Year at Clove Broo..." src="https://tllibros.com/wp-content/uploads/2024/12/9780847869749-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/lir-farmacologia/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="LIR. Farmacología" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284488-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="LIR. Farmacología">LIR. Farmacología</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,470.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">A Year at Clove Broo...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/abstract-compositional-analysis-of-iterated-relations-a-structural-approach-to-complex-state-transition-systems-lecture-notes-in-computer-science-1426/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Abstract Composition..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540655060-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/neurologia-de-bolsillo/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Neurología de bolsi..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892189-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Neurología de bolsi...">Neurología de bolsi...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,212.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Abstract Composition...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/abstraction-reformulation-and-approximation-4th-international-symposium-sara-2000-horseshoe-bay-usa-july-26-29-2000-proceedings-lecture-notes-in-computer-science-1864/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Abstraction, Reformu..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540678397-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/west-fisiopatologia-pulmonar-fundamentos/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="West. Fisiopatologí..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418563836-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="West. Fisiopatologí...">West. Fisiopatologí...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$890.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Abstraction, Reformu...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/active-technologies-for-network-and-service-management-10th-ifip-ieee-international-workshop-on-distributed-systems-operations-and-management-lecture-notes-in-computer-science-1700/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Active Technologies ..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540665984-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/fisiologia-respiratoria-fundamentos/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Fisiología Respirat..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257803-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Fisiología Respirat...">Fisiología Respirat...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,088.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Active Technologies ...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/ada-in-details-interpreting-the-2010-americans-with-disabilities-act-standards-for-accessible-design-international-code-council/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="ADA in Details: Inte..." src="https://tllibros.com/wp-content/uploads/2024/12/9781119900245-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/rang-fracturas-en-ninos/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Rang. Fracturas en n..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417949129-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Rang. Fracturas en n...">Rang. Fracturas en n...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,840.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">ADA in Details: Inte...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/advances-in-computing-science-asian-2000-6th-asian-computing-science-conference-penang-malaysia-november-25-27-2000-proceedings-lecture-notes-in-computer-science-1961/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Advances in Computin..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540414285-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/manual-de-valoracion-de-la-salud-en-enfermeria/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Manual de valoració..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788417370213-us-300x316.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Manual de valoració...">Manual de valoració...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,255.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Advances in Computin...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/advances-in-computing-science-asian97-third-asian-computing-science-conference-kathmandu-nepal-december-9-11-1997-proceedings-lecture-notes-in-computer-science-1345/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Advances in Computin..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540638759-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/enfermeria-facil-procedimientos-en-enfermeria/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Enfermería fácil. ..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788416353859-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Enfermería fácil. ...">Enfermería fácil. ...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$942.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Advances in Computin...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/advances-in-computing-science-asian99/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Advances in Computin..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540668565-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/medicina-de-las-adicciones-de-bolsillo/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Medicina de las adic..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284150-us-298x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Medicina de las adic...">Medicina de las adic...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,444.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Advances in Computin...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/aesthetics-equals-politics-new-discourses-across-art-architecture-and-philosophy-the-mit-press/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Aesthetics Equals Po..." src="https://tllibros.com/wp-content/uploads/2021/10/9780262039437-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/marriott-electrocardiografia-practica/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Marriott. Electrocar..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788416004201-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Marriott. Electrocar...">Marriott. Electrocar...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$2,735.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Aesthetics Equals Po...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/alexa-hampton-design-style-and-influence/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Alexa Hampton: Desig..." src="https://tllibros.com/wp-content/uploads/2024/12/9780593578643-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/rohen-atlas-de-anatomia-humana-anatomia/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Rohen. Atlas de anat..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788416353644-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Rohen. Atlas de anat...">Rohen. Atlas de anat...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$945.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Alexa Hampton: Desig...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/algebraic-foundations-of-systems-specification-ifip-state-of-the-art-reports/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Algebraic Foundation..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540637721-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/enfermeria-psiquiatrica/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Enfermería psiquiá..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788415419488-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Enfermería psiquiá...">Enfermería psiquiá...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$2,260.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Algebraic Foundation...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/algebraic-methodology-and-software-technology-8th-international-conference-amast-2000-iowa-city-iowa-usa-may-20-27-2000-proceedings-lecture-notes-in-computer-science-1816/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Algebraic Methodolog..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540675303-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/manual-del-formato-soap-para-rotaciones/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Manual del formato S..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418892608-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Manual del formato S...">Manual del formato S...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$964.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Algebraic Methodolog...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/algorithms-esa-98-6th-annual-european-symposium-venice-italy-august-24-26-1998-proceedings-lecture-notes-in-computer-science-1461/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Algorithms – E..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540648482-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/anestesia-de-bolsillo/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="Anestesia de bolsill..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788418257360-us-286x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="Anestesia de bolsill...">Anestesia de bolsill...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,064.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Algorithms – E...</h3>
 </div>
 </a>
+</td>
+</tr><tr>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/algorithms-esa99-7th-annual-european-symposium-prague-czech-republic-july-16-18-1999-proceedings-lecture-notes-in-computer-science-1643/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Algorithms – E..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540662518-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/el-libro-de-neurologia/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="El libro de Neurolog..." class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284334-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="El libro de Neurolog...">El libro de Neurolog...</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,490.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Algorithms – E...</h3>
 </div>
 </a>
+</td>
+<td align="center" style="padding: 10px;" valign="top" width="25%">
+<a href="https://tllibros.com/producto/algorithms-and-computation-8th-international-symposium-isaac97-singapore-december-17-19-1997-proceedings-lecture-notes-in-computer-science-1350/" style="text-decoration: none; color: inherit;">
+<div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+<img alt="Algorithms and Compu..." src="https://tllibros.com/wp-content/uploads/2021/10/9783540638902-us-300x450.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;"/>
 </div>
-
-<div class="book-card">
-<a href="https://tllibros.com/producto/el-libro-del-ecg/" style="text-decoration: none; color: inherit;">
-<div class="book-image-container">
-<img alt="El libro del ECG" class="book-image" src="https://tllibros.com/wp-content/uploads/2024/12/9788419284242-us-300x450.jpg"/>
-</div>
-<div class="book-info">
-<h3 class="book-title" title="El libro del ECG">El libro del ECG</h3>
-<p class="book-rating"></p>
-<p class="book-price">$1,490.00</p>
+<div style="margin-top: 10px; text-align: center;">
+<h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Algorithms and Compu...</h3>
 </div>
 </a>
-</div>
-</div>
-<div class="footer">
-<p>Visit our website for more books and information</p>
-<a class="btn" href="https://tllibros.com/" id="footer-link">Visit Website</a>
+</td>
+<td></td><td></td></tr></tbody></table></div>
+<div class="footer-cta">
+<a class="cta-button" href="https://tllibros.com/" id="footer-link">Visit Website</a>
 </div>
 </div>
 </body>

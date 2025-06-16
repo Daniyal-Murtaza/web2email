@@ -4,6 +4,11 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 import logging
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -11,160 +16,160 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Configuration
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
-SMTP_USER = "daniyalmurtaza77@gmail.com"
-SMTP_PASSWORD = "vkej tzrb pdfo albd"
+# Configuration from environment variables
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+SMTP_USER = os.getenv("SMTP_USER")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 
 def get_basic_template() -> str:
-    """Return a simplified HTML template."""
+    """Return a simplified HTML template suitable for a 4-column grid flyer-style book layout with logo and CTA."""
     return """
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Webpage Snapshot</title>
+        <title>Book Flyer</title>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
             body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                background-color: #f5f5f5;
+                font-family: 'Poppins', sans-serif;
+                background-color: #1e1e1e;
                 margin: 0;
                 padding: 0;
+                color: #ffffff;
             }
+
             .container {
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 20px;
             }
-            .header {
+
+            .logo-header {
                 text-align: center;
-                padding: 20px 0;
-                background: #fff;
-                margin-bottom: 20px;
+                padding: 30px 0 10px 0;
             }
+
             .logo {
-                max-width: 200px;
+                max-width: 180px;
                 height: auto;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
             }
+
             .book-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
-                padding: 20px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+                padding: 20px 0;
             }
+
             .book-card {
-                background: #fff;
-                border-radius: 8px;
-                overflow: hidden;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                transition: transform 0.2s;
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+                text-align: center;
+                background: transparent;
+                color: #ffffff;
             }
-            .book-card:hover {
-                transform: translateY(-5px);
-            }
+
             .book-image-container {
                 width: 100%;
-                height: 300px;
+                height: 240px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #f8f8f8;
-                padding: 20px;
+                overflow: hidden;
+                background-color: #2d2d2d;
+                border-radius: 8px;
             }
+
             .book-image {
-                max-width: 100%;
                 max-height: 100%;
-                width: auto;
-                height: auto;
+                max-width: 100%;
                 object-fit: contain;
             }
+
             .book-info {
-                padding: 15px;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-            }
-            .book-title {
-                font-size: 16px;
-                font-weight: bold;
-                margin: 0 0 10px 0;
-                color: #333;
-                line-height: 1.4;
-                min-height: 44px; /* Approximately 2 lines of text */
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .book-price {
-                color: #28a745;
-                font-weight: bold;
-                margin: 5px 0;
-            }
-            .book-rating {
-                color: #ffc107;
-                margin: 5px 0;
-            }
-            .category-title {
-                background: #fff;
-                padding: 20px;
-                margin-bottom: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .footer {
-                text-align: center;
-                padding: 20px;
-                background: #fff;
-                margin-top: 20px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .btn {
-                display: inline-block;
-                padding: 10px 20px;
-                background: #007bff;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
                 margin-top: 10px;
             }
-            .btn:hover {
-                background: #0056b3;
+
+            .book-title {
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 1.3;
+                color: #ffffff;
+                margin: 10px 0 0 0;
+                max-height: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .footer-cta {
+                text-align: center;
+                padding: 40px 0;
+            }
+
+            .cta-button {
+                background-color: #ffffff;
+                color: #1e1e1e;
+                padding: 12px 30px;
+                border-radius: 25px;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                transition: background-color 0.3s ease;
+            }
+
+            .cta-button:hover {
+                background-color: #cccccc;
+            }
+
+            /* Responsive */
+            @media (max-width: 1024px) {
+                .book-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .book-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 480px) {
+                .book-grid {
+                    grid-template-columns: 1fr;
+                }
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <div class="header">
-                <a href="#" id="site-logo-link">
-                    <img id="site-logo" class="logo" src="" alt="Todos Los Libros">
+            <div class="logo-header">
+                <a href="https://tllibros.com/" id="site-logo-link">
+                    <img id="site-logo" class="logo" src="" alt="Site Logo">
                 </a>
             </div>
-            
-            <div class="category-title">
-                <h1 id="title"></h1>
-                <div id="category-info"></div>
-            </div>
-            
+
             <div class="book-grid" id="main-content">
-                <!-- Book cards will be inserted here -->
+                <!-- Dynamic book cards will be inserted here -->
             </div>
-            
-            <div class="footer">
-                <p>Visit our website for more books and information</p>
-                <a href="#" id="footer-link" class="btn">Visit Website</a>
+
+            <div class="footer-cta">
+                <a href="https://tllibros.com/" id="footer-link" class="cta-button">Visit Website</a>
             </div>
         </div>
     </body>
     </html>
     """
+
+
+
 
 def extract_content(soup: BeautifulSoup) -> dict:
     """Extract content from the webpage."""
@@ -265,6 +270,77 @@ def extract_content(soup: BeautifulSoup) -> dict:
     
     return content
 
+# def create_email_html(content: dict) -> str:
+#     """Create email HTML from content."""
+#     try:
+#         template = get_basic_template()
+#         soup = BeautifulSoup(template, 'html.parser')
+        
+#         # Set logo
+#         logo_elem = soup.find('img', id='site-logo')
+#         if logo_elem:
+#             if content["logo"]["src"]:
+#                 logo_elem['src'] = content["logo"]["src"]
+#             elif "text" in content["logo"]:
+#                 logo_elem.replace_with(BeautifulSoup(f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
+
+#         logo_link = soup.find('a', id='site-logo-link')
+#         if logo_link and content["logo"]["link"]:
+#             logo_link['href'] = content["logo"]["link"]
+
+#         # Set title
+#         title_elem = soup.find('h1', id='title')
+#         if title_elem:
+#             title_elem.string = content.get("title", "Webpage Snapshot")
+
+#         # Set category info
+#         category_info_elem = soup.find('div', id='category-info')
+#         if category_info_elem and content.get("category_info"):
+#             category_info_elem.string = content["category_info"]
+
+#         # Set main content
+#         main_content_elem = soup.find('div', id='main-content')
+#         if main_content_elem:
+#             # Create a table to ensure 4-column layout compatibility in email
+#             table_html = '<table width="100%" cellspacing="0" cellpadding="10" style="border-collapse: collapse;"><tbody>'
+            
+#             books = content.get("books", [])
+#             for i in range(0, len(books), 4):
+#                 table_html += '<tr>'
+#                 for j in range(4):
+#                     if i + j < len(books):
+#                         book = books[i + j]
+#                         table_html += f"""
+#                             <td align="center" valign="top" width="25%" style="padding: 10px;">
+#                                 <a href="{book['link']}" style="text-decoration: none; color: inherit;">
+#                                     <div class="book-image-container" style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+#                                         <img src="{book['image']}" class="book-image" alt="{book['title']}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+#                                     </div>
+#                                     <div class="book-info" style="margin-top: 10px; text-align: center;">
+#                                         <h3 class="book-title" style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{book['title']}</h3>
+#                                     </div>
+#                                 </a>
+#                             </td>
+#                         """
+#                     else:
+#                         table_html += '<td></td>'  # Fill remaining cells if not multiple of 4
+#                 table_html += '</tr>'
+#             table_html += '</tbody></table>'
+
+#             # Replace content with the table
+#             main_content_elem.clear()
+#             main_content_elem.append(BeautifulSoup(table_html, 'html.parser'))
+
+#         # Set footer link
+#         footer_link = soup.find('a', id='footer-link')
+#         if footer_link and content.get("site_url"):
+#             footer_link['href'] = content["site_url"]
+
+#         return str(soup)
+#     except Exception as e:
+#         logger.error(f"Error creating email HTML: {e}")
+#         return ""
+
 def create_email_html(content: dict) -> str:
     """Create email HTML from content."""
     try:
@@ -274,75 +350,96 @@ def create_email_html(content: dict) -> str:
         # Set logo
         logo_elem = soup.find('img', id='site-logo')
         if logo_elem:
-            if content["logo"]["src"]:
+            if content["logo"].get("src"):
                 logo_elem['src'] = content["logo"]["src"]
             elif "text" in content["logo"]:
-                # If no logo image, use text
-                logo_elem.replace_with(BeautifulSoup(f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
-        
+                logo_elem.replace_with(BeautifulSoup(
+                    f'<h1 class="site-title">{content["logo"]["text"]}</h1>', 'html.parser'))
+
         logo_link = soup.find('a', id='site-logo-link')
-        if logo_link and content["logo"]["link"]:
+        if logo_link and content["logo"].get("link"):
             logo_link['href'] = content["logo"]["link"]
-        
+
         # Set title
         title_elem = soup.find('h1', id='title')
         if title_elem:
-            title_elem.string = content["title"] or "Webpage Snapshot"
-        
+            title_elem.string = content.get("title", "Webpage Snapshot")
+
         # Set category info
         category_info_elem = soup.find('div', id='category-info')
-        if category_info_elem and content["category_info"]:
+        if category_info_elem and content.get("category_info"):
             category_info_elem.string = content["category_info"]
-        
+
         # Set main content
         main_content_elem = soup.find('div', id='main-content')
         if main_content_elem:
-            # Add book cards
-            for book in content["books"]:
-                # Create book card
-                card_html = f"""
-                    <div class="book-card">
-                        <a href="{book['link']}" style="text-decoration: none; color: inherit;">
-                            <div class="book-image-container">
-                                <img src="{book['image']}" class="book-image" alt="{book['title']}">
-                            </div>
-                            <div class="book-info">
-                                <h3 class="book-title" title="{book['title']}">{book['title']}</h3>
-                                <p class="book-rating">{book['rating']}</p>
-                                <p class="book-price">{book['price']}</p>
-                            </div>
-                        </a>
-                    </div>
-                """
-                main_content_elem.append(BeautifulSoup(card_html, 'html.parser'))
-        
-        # Set footer link
-        footer_link = soup.find('a', id='footer-link')
-        if footer_link and content["site_url"]:
-            footer_link['href'] = content["site_url"]
-        
+            books = content.get("books", [])
+            table_html = '<table width="100%" cellspacing="0" cellpadding="10" style="border-collapse: collapse;"><tbody>'
+            
+            for i in range(0, len(books), 4):
+                table_html += '<tr>'
+                for j in range(4):
+                    if i + j < len(books):
+                        book = books[i + j]
+                        table_html += f"""
+                            <td align="center" valign="top" width="25%" style="padding: 10px;">
+                                <a href="{book['link']}" style="text-decoration: none; color: inherit;">
+                                    <div style="width: 100%; height: 250px; background-color: #2d2d2d; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="{book['image']}" alt="{book['title']}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div style="margin-top: 10px; text-align: center;">
+                                        <h3 style="font-size: 15px; font-weight: 600; color: #ffffff; margin: 10px 0 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{book['title']}</h3>
+                                    </div>
+                                </a>
+                            </td>
+                        """
+                    else:
+                        table_html += '<td></td>'  # fill blank cell if needed
+                table_html += '</tr>'
+            table_html += '</tbody></table>'
+
+            main_content_elem.clear()
+            main_content_elem.append(BeautifulSoup(table_html, 'html.parser'))
+
+        # Set footer CTA link
+        footer = soup.find('div', class_='footer')
+        if footer and content.get("site_url"):
+            footer_link_html = f"""
+                <p>Discover more amazing books on our website</p>
+                <a href="{content['site_url']}" class="btn" style="display: inline-block; padding: 12px 30px; background: #ffffff; color: #6c5ce7; text-decoration: none; border-radius: 25px; font-weight: 600; border: 2px solid transparent;">
+                    Visit Website
+                </a>
+            """
+            footer.clear()
+            footer.append(BeautifulSoup(footer_link_html, 'html.parser'))
+
         return str(soup)
     except Exception as e:
         logger.error(f"Error creating email HTML: {e}")
         return ""
 
-def send_email(html_content: str, subject: str, to_email: str):
-    """Send the email."""
+
+
+def send_email(html_content: str, subject: str, to_emails: list):
+    """Send the email to multiple recipients."""
     if not html_content:
         raise ValueError("Empty HTML content")
+    
+    if not to_emails:
+        raise ValueError("No recipients specified")
     
     msg = MIMEText(html_content, "html")
     msg['Subject'] = subject
     msg['From'] = SMTP_USER
-    msg['To'] = to_email
+    msg['To'] = ", ".join(to_emails)  # Join multiple emails with commas
 
     try:
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:
             server.ehlo()
             server.starttls()
             server.login(SMTP_USER, SMTP_PASSWORD)
-            server.sendmail(SMTP_USER, to_email, msg.as_string())
-        logger.info(f"✅ Email sent to {to_email}")
+            server.sendmail(SMTP_USER, to_emails, msg.as_string())
+        logger.info(f"✅ Email sent to {len(to_emails)} recipients")
     except Exception as e:
         logger.error(f"❌ Email sending failed: {e}")
         raise
@@ -354,29 +451,81 @@ def index():
     success = ""
 
     if request.method == 'POST':
-        url = request.form.get('url')
-        recipient = request.form.get('recipient')
+        mode = request.form.get('mode', 'url')
+        recipients = request.form.get('recipients', '').strip()
 
         try:
-            logger.info(f"Processing URL: {url}")
+            # Validate and process recipients
+            if not recipients:
+                raise ValueError("No recipients specified")
             
-            # Fetch and parse the webpage
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
+            # Split recipients by comma or newline and clean up
+            recipient_list = [email.strip() for email in recipients.replace('\n', ',').split(',') if email.strip()]
             
-            # Remove unwanted elements
-            for tag in soup(['script', 'iframe', 'noscript']):
-                tag.decompose()
-            
-            # Extract content
-            content = extract_content(soup)
-            logger.info("Content extracted successfully")
-            
-            # Create email HTML
-            email_html = create_email_html(content)
-            if not email_html:
-                raise ValueError("Failed to create email HTML")
+            # Basic email validation
+            for email in recipient_list:
+                if '@' not in email or '.' not in email:
+                    raise ValueError(f"Invalid email address: {email}")
+
+            if mode == 'url':
+                url = request.form.get('url')
+                if not url:
+                    raise ValueError("URL is required in URL mode")
+
+                logger.info(f"Processing URL: {url}")
+                
+                # Fetch and parse the webpage
+                response = requests.get(url, timeout=10)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                # Remove unwanted elements
+                for tag in soup(['script', 'iframe', 'noscript']):
+                    tag.decompose()
+                
+                # Extract content
+                content = extract_content(soup)
+                logger.info("Content extracted successfully")
+                
+                # Create email HTML
+                email_html = create_email_html(content)
+                if not email_html:
+                    raise ValueError("Failed to create email HTML")
+                
+                subject = f"Snapshot of {url}"
+            else:  # direct mode
+                subject = request.form.get('subject', '')
+                if not subject:
+                    raise ValueError("Subject is required in direct mode")
+                
+                email_content = request.form.get('email_content', '')
+                if not email_content:
+                    raise ValueError("Email content is required in direct mode")
+                
+                # Create a basic HTML template for direct email
+                email_html = f"""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>{subject}</title>
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                            line-height: 1.6;
+                            color: #333;
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 20px;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    {email_content}
+                </body>
+                </html>
+                """
             
             logger.info("Email HTML created successfully")
             
@@ -385,9 +534,9 @@ def index():
                 f.write(email_html)
             logger.info("Email template saved to file")
 
-            if recipient:
-                send_email(email_html, f"Snapshot of {url}", recipient)
-                success = f"✅ Email sent successfully to {recipient}!"
+            if recipient_list:
+                send_email(email_html, subject, recipient_list)
+                success = f"✅ Email sent successfully to {len(recipient_list)} recipients!"
 
         except Exception as e:
             error = f"❌ Error: {e}"
@@ -396,4 +545,5 @@ def index():
     return render_template('index.html', email_html=email_html, error=error, success=success)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)

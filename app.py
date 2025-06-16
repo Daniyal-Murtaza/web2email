@@ -4,6 +4,11 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 import logging
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -11,11 +16,11 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Configuration
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
-SMTP_USER = "danielzaydee@gmail.com"
-SMTP_PASSWORD = "ahcc crvg xyao lseq"
+# Configuration from environment variables
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+SMTP_USER = os.getenv("SMTP_USER")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 
 def get_basic_template() -> str:
     """Return a simplified HTML template suitable for a 4-column grid flyer-style book layout with logo and CTA."""
@@ -540,4 +545,5 @@ def index():
     return render_template('index.html', email_html=email_html, error=error, success=success)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
